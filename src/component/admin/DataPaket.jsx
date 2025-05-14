@@ -58,7 +58,7 @@ const DataPaket = () => {
   };
 
   return (
-    <div className="p-4" translate="no">
+    <div className="p-0 sm:p-4" translate="no">
       <ToastContainer position="top-right" autoClose={3000} />
       <AnimatePresence>
         {isOpenModalAdd && (

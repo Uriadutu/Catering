@@ -75,7 +75,7 @@ const DataMenu = () => {
         <div className="flex gap-2">
           <button
             onClick={() => navigate(-1)}
-            className="bg-[#6b5dff] text-white px-4 py-2 rounded hover:bg-blue-700 transition whitespace-nowrap"
+            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-400 transition whitespace-nowrap"
           >
             Kembali
           </button>

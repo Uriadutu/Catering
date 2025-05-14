@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import nama from "../../img/nama.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -30,13 +31,13 @@ const Navbar = () => {
           onClick={() => handleNavigate("/")}
           translate="no"
         >
-          Catering
+         <img src={nama} className="w-24 sm:w-32" alt="" />
         </h1>
 
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-6 py-2 bg-[#6b5dff] text-white rounded font-semibold hover:bg-[#5b4ce0] transition"
+          className="px-6 py-2 bg-[#6b5dff] text-white rounded font-semibold hover:bg-blue-500 transition"
           onClick={() => handleNavigate("/masuk")}
         >
           Masuk

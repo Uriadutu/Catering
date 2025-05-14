@@ -44,10 +44,10 @@ const Pendapatan = () => {
     }).format(number);
 
   return (
-    <div className="p-6" translate="no">
-      <div className="flex justify-between items-center mb-6">
+    <div className=" sm:p-4" translate="no">
+      <div className="grid grid-cols-1 sm:grid-cols-2 items-center mb-6">
         <h1 className="text-2xl font-semibold text-[#6b5dff]">
-          Data Pendapatan
+          Pendapatan
         </h1>
         <div className="bg-green-100 text-green-700 px-4 py-2 rounded-md text-sm shadow-sm">
           <strong>Total Keuntungan:</strong> {formatRupiah(totalPendapatan)}

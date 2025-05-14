@@ -7,7 +7,7 @@ import {
   FiLogOut,
   FiShoppingCart,
 } from "react-icons/fi";
-import { IoFileTrayFullOutline } from "react-icons/io5";
+import { IoFastFoodOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div className="hidden sm:flex flex-col z-40 bg-white w-64 px-6 py-8 text-gray-800 border border-gray-200">
       {/* Menu Section */}
       <nav className="flex flex-col gap-4">
-        <SidebarItem to="/paket" icon={<IoFileTrayFullOutline />} label="Data Makanan" />
+        <SidebarItem to="/paket" icon={<IoFastFoodOutline />} label="Data Makanan" />
         <SidebarItem to="/pemesanan" icon={<FiShoppingCart />} label="Pemesanan Masuk" />
         <SidebarItem to="/pendapatan" icon={<FiDollarSign />} label="Pendapatan"/>
         <SidebarButton onClick={logout} icon={<FiLogOut />} label="Keluar" />

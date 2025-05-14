@@ -62,7 +62,7 @@ const PesananMasuk = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-0 sm:p-4">
       <ToastContainer position="top-right" autoClose={3000} />
 
       <h1 className="text-2xl font-semibold text-[#6b5dff] mb-6">

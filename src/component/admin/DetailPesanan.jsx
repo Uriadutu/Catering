@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 
 const DetailPesanan = () => {
@@ -14,10 +9,7 @@ const DetailPesanan = () => {
 
   useEffect(() => {
     const fetchPesanan = async () => {
-      const q = query(
-        collection(db, "pesanan"),
-        where("__name__", "==", id)
-      );
+      const q = query(collection(db, "pesanan"), where("__name__", "==", id));
 
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
@@ -55,28 +47,42 @@ const DetailPesanan = () => {
   }
 
   return (
-    <div className="p-6">
-    <div className="flex items-center justify-between mb-8 max-w-xl mx-auto">
-  <h1 className="text-2xl font-bold text-[#4F46E5]">Detail Pesanan Diterima</h1>
-  <button
-    onClick={() => window.history.back()}
-    className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition"
-  >
-    Kembali
-  </button>
-</div>
-
+    <div className="sm:p-6 ">
+      <div className="flex items-center justify-between mb-8 max-w-xl mx-auto">
+        <h1 className="text-2xl font-bold text-[#4F46E5]">
+          Detail Pesanan
+        </h1>
+        <button
+          onClick={() => window.history.back()}
+          className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition"
+        >
+          Kembali
+        </button>
+      </div>
 
       <div className="bg-white rounded-2xl shadow-lg p-6 max-w-xl mx-auto border border-gray-200">
         <div className="mb-6 text-center">
-          <h2 className="text-xl font-semibold text-gray-800">{pesanan.namaPaket}</h2>
-          <p className="text-sm text-gray-500">{formatTanggal(pesanan.tanggal)}</p>
+          <h2 className="text-xl font-semibold text-gray-800">
+            {pesanan.namaPaket}
+          </h2>
+          <p className="text-sm text-gray-500">
+            {formatTanggal(pesanan.tanggal)}
+          </p>
         </div>
 
         <div className="mb-4 text-sm text-gray-700 space-y-2">
-          <p><span className="font-medium text-gray-600">Nama Lengkap:</span> {pesanan.namaLengkap}</p>
-          <p><span className="font-medium text-gray-600">No WhatsApp:</span> {pesanan.noWa}</p>
-          <p><span className="font-medium text-gray-600">Harga Paket:</span> {formatRupiah(pesanan.harga)}</p>
+          <p>
+            <span className="font-medium text-gray-600">Nama Lengkap:</span>{" "}
+            {pesanan.namaLengkap}
+          </p>
+          <p>
+            <span className="font-medium text-gray-600">No WhatsApp:</span>{" "}
+            {pesanan.noWa}
+          </p>
+          <p>
+            <span className="font-medium text-gray-600">Harga Paket:</span>{" "}
+            {formatRupiah(pesanan.harga)}
+          </p>
         </div>
 
         <div>

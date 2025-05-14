@@ -106,7 +106,7 @@ const AddPaketModal = ({ setIsOpenModalAdd }) => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#00D020] px-3 py-2 text-white font-semibold text-sm rounded hover:bg-[#3bdf54] transition duration-300"
+              className="bg-[#6b5dff] px-3 py-2 text-white font-semibold text-sm rounded hover:bg-[#766aff] transition duration-300"
             >
               {loading ? "Menyimpan..." : "Simpan"}
             </button>

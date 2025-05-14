@@ -7,10 +7,11 @@ import {
   FiShoppingCart,
   FiDollarSign,
 } from "react-icons/fi";
+import { IoFastFoodOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../auth/Firebase";
-import { IoFileTrayFullOutline } from "react-icons/io5";
+import nama from "../img/nama.png";
 
 const Navbar = () => {
   const [openSidebar, setOpenSideBar] = useState(false);
@@ -44,11 +45,11 @@ const Navbar = () => {
         <div className="p-4">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center gap-3">
-              <div className="bg-[#207f15] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+              <div className="bg-[#6b5dff] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
                 <FiUser />
               </div>
               <div>
-                <p className="text-sm font-semibold text-[#207f15]">
+                <p className="text-sm font-semibold text-[#6b5dff]">
                   {/* {user.displayName} */}
                 </p>
                 <p className="text-xs text-gray-500">{user?.email}</p>
@@ -61,7 +62,7 @@ const Navbar = () => {
 
           {/* Menu */}
           <nav className="flex flex-col gap-3 mt-4">
-            <SidebarItem to="/paket" icon={<IoFileTrayFullOutline />} label="Data Makanan" onClick={() => setOpenSideBar(false)} />
+            <SidebarItem to="/paket" icon={<IoFastFoodOutline />} label="Data Makanan" onClick={() => setOpenSideBar(false)} />
             <SidebarItem to="/pemesanan" icon={<FiShoppingCart />} label="Pemesanan Masuk" onClick={() => setOpenSideBar(false)} />
             <SidebarItem to="/pendapatan" icon={<FiDollarSign />} label="Pendapatan" onClick={() => setOpenSideBar(false)} />
             <SidebarButton onClick={() => { logout(); setOpenSideBar(false); }} icon={<FiLogOut />} label="Keluar" />
@@ -72,12 +73,7 @@ const Navbar = () => {
       {/* Top Navbar */}
       <div className="fixed top-0 left-0 w-full z-30 bg-white border-b border-gray-200 py-6 px-4 sm:px-6 flex justify-between items-center">
         {/* Nama Aplikasi */}
-         <h1
-          className="text-xl font-bold text-[#6b5dff]"
-          translate="no"
-        >
-          Catering
-        </h1>
+         <img src={nama} className="w-24 sm:w-32" alt="" />
         {/* Mobile: Hamburger Button */}
         <button onClick={() => setOpenSideBar(true)} className="sm:hidden">
           <GiHamburgerMenu color="#333" size={22} />

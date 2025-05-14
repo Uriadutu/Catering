@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 import { AnimatePresence } from "framer-motion";
-import PesanPaketModal from "./PesanModal";  // Import modal pesan paket
+import PesanPaketModal from "./PesanModal"; // Import modal pesan paket
 
 const Splash = () => {
   const [packages, setPackages] = useState([]);
   const [menus, setMenus] = useState({});
-  const [openModalAdd, setOpenModalAdd] = useState(false);  // Modal untuk pesan paket
-  const [selectedPaket, setSelectedPaket] = useState(null);  // Paket yang dipilih
+  const [openModalAdd, setOpenModalAdd] = useState(false); // Modal untuk pesan paket
+  const [selectedPaket, setSelectedPaket] = useState(null); // Paket yang dipilih
   const [expandedMenus, setExpandedMenus] = useState({});
 
   useEffect(() => {
@@ -49,10 +49,9 @@ const Splash = () => {
       minimumFractionDigits: 0,
     }).format(number);
 
-
   const handlePesanPaket = (paket) => {
-    setSelectedPaket(paket);  // Set paket yang dipilih
-    setOpenModalAdd(true);  // Tampilkan modal pesan paket
+    setSelectedPaket(paket); // Set paket yang dipilih
+    setOpenModalAdd(true); // Tampilkan modal pesan paket
   };
 
   const toggleExpanded = (id) => {
@@ -69,36 +68,41 @@ const Splash = () => {
           <PesanPaketModal
             setIsOpenModalAdd={setOpenModalAdd}
             paket={selectedPaket}
-            menus={menus[selectedPaket.id] || []}  // Kirim menu yang relevan
+            menus={menus[selectedPaket.id] || []} // Kirim menu yang relevan
           />
         )}
       </AnimatePresence>
       <h2 className="text-2xl sm:text-4xl text-center font-bold text-gray-900 mb-5">
-        Pilih Paket Makanan Terbaik
+        Pilihan Paket Makanan Terbaik untuk Anda dari{" "}
+        <span className="text-[#6b5dff]"> Catering</span>
       </h2>
+
       <p className="text-center text-gray-600 mb-10">
-        Nikmati berbagai pilihan paket makanan lezat dan bergizi untuk acara Anda.
+        Nikmati berbagai pilihan paket makanan lezat dan bergizi untuk acara
+        Anda.
       </p>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
         {packages.length > 0 ? (
           packages.slice(0, 8).map((pkg) => {
             const isExpanded = expandedMenus[pkg.id];
-            const menuList = menus[pkg.id] || []; // menu dari paket terkait
+            const menuList = menus[pkg.id] || [];
             const firstFive = menuList.slice(0, 5);
             const remaining = menuList.slice(5);
 
             return (
               <div
                 key={pkg.id}
-                className="flex flex-col p-6 bg-orange-50 rounded-md border border-orange-300 transition duration-300 hover:scale-[1.01]"
+                className="flex flex-col p-6 bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition duration-300 hover:scale-[1.01]"
               >
-                <h3 className="text-lg text-center font-semibold text-orange-800 mb-4">
+                <h3 className="text-xl font-semibold text-gray-800 text-center mb-4">
                   {pkg.nama}
                 </h3>
 
                 <div className="mb-3 text-sm text-gray-700">
-                  <p className="font-medium mb-1">Menu Makanan:</p>
+                  <p className="font-medium mb-2 text-gray-800">
+                    Menu Makanan:
+                  </p>
                   <ul className="list-disc list-inside space-y-1 text-left">
                     {firstFive.map((menu, idx) => (
                       <li key={idx}>{menu.namaMenu}</li>
@@ -111,7 +115,7 @@ const Splash = () => {
 
                   {menuList.length > 5 && (
                     <button
-                      className="mt-2 text-sm text-orange-600 hover:underline"
+                      className="mt-2 text-sm text-[#6b5dff] hover:underline"
                       onClick={() => toggleExpanded(pkg.id)}
                     >
                       {isExpanded ? "Tutup" : "Lihat Selengkapnya"}
@@ -119,13 +123,13 @@ const Splash = () => {
                   )}
                 </div>
 
-                <p className="text-2xl font-bold text-orange-700 my-4 text-center">
+                <p className="text-2xl font-bold text-gray-900 my-4 text-center">
                   {formatRupiah(pkg.harga)}
                 </p>
 
                 <button
-                  onClick={() => handlePesanPaket(pkg)}  // Aksi untuk pesan paket
-                  className="mt-auto w-full py-2 bg-orange-500 text-white rounded-md text-sm font-medium hover:bg-orange-600 transition duration-300"
+                  onClick={() => handlePesanPaket(pkg)}
+                  className="mt-auto w-full py-2 rounded-lg bg-[#6b5dff] text-white font-semibold text-sm hover:bg-blue-500 transition duration-300"
                 >
                   Pilih Paket
                 </button>

@@ -52,7 +52,7 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
       {" "}
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 sm:mx-0 sm:w-[400px] max-h-[90vh] overflow-y-auto p-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-        <span className="text-orange-600">{paket.nama}</span>
+        <span className="text-[#6b5dff]">{paket.nama}</span>
         </h3>
 
         <div className="space-y-4">
@@ -64,7 +64,7 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
               type="text"
               value={namaLengkap}
               onChange={(e) => setNamaLengkap(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6b5dff]"
             />
           </div>
 
@@ -76,7 +76,7 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
               type="text"
               value={noWa}
               onChange={(e) => setNoWa(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#6b5dff]"
             />
           </div>
 
@@ -94,7 +94,7 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
                     type="checkbox"
                     checked={selectedMenus.includes(menu.namaMenu)}
                     onChange={() => handleCheckboxChange(menu.namaMenu)}
-                    className="form-checkbox text-orange-500"
+                    className="form-checkbox text-[#6b5dff]"
                   />
                   <span>{menu.namaMenu}</span>
                 </label>
@@ -106,13 +106,13 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
         <div className="flex justify-end space-x-2 mt-6">
           <button
             onClick={() => setIsOpenModalAdd(false)}
-            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+            className="px-4 py-2 bg-gray-500 text-white rounded duration-300 hover:bg-gray-600"
           >
             Batal
           </button>
           <button
             onClick={handleSubmit}
-            className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
+            className="px-4 py-2 bg-[#6b5dff] text-white rounded duration-300 hover:bg-blue-600"
           >
             Simpan Pesanan
           </button>
