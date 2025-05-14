@@ -7,16 +7,14 @@ import { toast } from "react-toastify";
 
 const AddPaketModal = ({ setIsOpenModalAdd }) => {
   const [namaPaket, setNamaPaket] = useState("");
-  const [download, setDownload] = useState("");
-  const [upload, setUpload] = useState("");
   const [harga, setHarga] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleTambahPaket = async (e) => {
     e.preventDefault();
 
-    if (!namaPaket.trim() || !download.trim() || !upload.trim() || !harga.trim()) {
-      alert("Semua field wajib diisi.");
+    if (!namaPaket.trim() || !harga.trim()) {
+      alert("Nama Paket dan Harga wajib diisi.");
       return;
     }
 
@@ -38,16 +36,12 @@ const AddPaketModal = ({ setIsOpenModalAdd }) => {
     try {
       await addDoc(collection(db, "paket"), {
         nama: namaPaket,
-        download,
-        upload,
         harga: hargaNumber,
         createdAt: new Date(),
         uid: user.uid,
       });
       toast.success("Paket berhasil ditambahkan!");
       setNamaPaket("");
-      setDownload("");
-      setUpload("");
       setHarga("");
       setIsOpenModalAdd(false);
     } catch (error) {
@@ -80,37 +74,17 @@ const AddPaketModal = ({ setIsOpenModalAdd }) => {
           <div className="p-4 space-y-4 text-gray-700">
             <div className="grid gap-4">
               <div className="grid grid-cols-2 items-center gap-4">
-                <label className="text-sm font-medium">Nama Makanan</label>
+                <label className="text-sm font-medium">Nama Paket</label>
                 <input
                   type="text"
                   value={namaPaket}
                   onChange={(e) => setNamaPaket(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  placeholder="Masukan Nama Makanan"
+                  placeholder="Masukan Nama Paket"
                 />
               </div>
               <div className="grid grid-cols-2 items-center gap-4">
-                <label className="text-sm font-medium">Kecepatan Download</label>
-                <input
-                  type="text"
-                  value={download}
-                  onChange={(e) => setDownload(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  placeholder="Contoh: 10 Mbps"
-                />
-              </div>
-              <div className="grid grid-cols-2 items-center gap-4">
-                <label className="text-sm font-medium">Kecepatan Upload</label>
-                <input
-                  type="text"
-                  value={upload}
-                  onChange={(e) => setUpload(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  placeholder="Contoh: 5 Mbps"
-                />
-              </div>
-              <div className="grid grid-cols-2 items-center gap-4">
-                <label className="text-sm font-medium">Harga (Rp)</label>
+                <label className="text-sm font-medium">Harga Paket (Rp)</label>
                 <input
                   type="number"
                   value={harga}

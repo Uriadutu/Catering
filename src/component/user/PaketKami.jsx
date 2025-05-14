@@ -59,7 +59,7 @@ const PaketKami = () => {
         Nikmati berbagai pilihan paket makanan lezat dan bergizi untuk acara Anda.
       </p>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6">
         {packages.length > 0 ? (
           packages.slice(0, 8).map((pkg) => {
             const isExpanded = expandedMenus[pkg.id];

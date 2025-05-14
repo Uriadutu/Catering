@@ -79,25 +79,18 @@ const DataPaket = () => {
           <table className="min-w-full text-sm text-gray-800 bg-white">
             <thead className="bg-gray-100 text-left">
               <tr>
-                <th className="px-4 py-2 border whitespace-nowrap" rowSpan={2}>
+                <th className="px-4 py-2 border whitespace-nowrap">
                   No
                 </th>
-                <th className="px-4 py-2 border whitespace-nowrap" rowSpan={2}>
+                <th className="px-4 py-2 border whitespace-nowrap">
                   Nama Makanan
                 </th>
-                <th className="px-4 py-2 border text-center whitespace-nowrap" colSpan={2}>
-                  Kecepatan
+                <th className="px-4 py-2 border whitespace-nowrap">
+                  Harga
                 </th>
-                <th className="px-4 py-2 border whitespace-nowrap" rowSpan={2}>
-                  Harga per Bulan
-                </th>
-                <th className="px-4 py-2 border whitespace-nowrap" rowSpan={2}>
+                <th className="px-4 py-2 border whitespace-nowrap">
                   Aksi
                 </th>
-              </tr>
-              <tr>
-                <th className="px-4 py-2 border whitespace-nowrap">Download</th>
-                <th className="px-4 py-2 border whitespace-nowrap">Upload</th>
               </tr>
             </thead>
             <tbody>
@@ -105,8 +98,6 @@ const DataPaket = () => {
                 <tr key={paket.id} className="hover:bg-gray-50">
                   <td className="px-4 py-2 border whitespace-nowrap">{index + 1}</td>
                   <td className="px-4 py-2 border whitespace-nowrap">{paket.nama}</td>
-                  <td className="px-4 py-2 border whitespace-nowrap">{paket.download}</td>
-                  <td className="px-4 py-2 border whitespace-nowrap">{paket.upload}</td>
                   <td className="px-4 py-2 border whitespace-nowrap">
                     {formatRupiah(paket.harga)}
                   </td>
