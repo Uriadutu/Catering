@@ -52,7 +52,7 @@ const PesanPaketModal = ({ setIsOpenModalAdd, paket, menus }) => {
       {" "}
       <div className="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 sm:mx-0 sm:w-[400px] max-h-[90vh] overflow-y-auto p-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-          Pesan Paket <span className="text-orange-600">{paket.nama}</span>
+        <span className="text-orange-600">{paket.nama}</span>
         </h3>
 
         <div className="space-y-4">

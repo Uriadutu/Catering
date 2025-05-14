@@ -18,13 +18,6 @@ const Navbar = () => {
     navigate(path);
   };
 
-  const handleScroll = (target) => {
-    const to = document.getElementById(target);
-    if (to) {
-      to.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-shadow duration-300 ${

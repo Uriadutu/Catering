@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
 import { AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import PesanPaketModal from "./PesanModal";  // Import modal pesan paket
 
 const PaketKami = () => {
@@ -50,7 +49,6 @@ const PaketKami = () => {
       minimumFractionDigits: 0,
     }).format(number);
 
-  const navigate = useNavigate();
 
   const handlePesanPaket = (paket) => {
     setSelectedPaket(paket);  // Set paket yang dipilih

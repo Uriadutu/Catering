@@ -11,6 +11,7 @@ import DaftarPaketPage from "./pages/DaftarPaketPage";
 import DaftarMenuPage from "./pages/admin-page/DaftarMenuPage";
 import PesananMasukPage from "./pages/admin-page/PesananMasukPage";
 import PendapatanPage from "./pages/admin-page/PendapatanPage";
+import DetailPesananPage from "./pages/admin-page/DetailPesananPage";
 
 function App() {
   return (
@@ -64,7 +65,7 @@ function App() {
             path="/detail-pesanan/:id"
             element={
               <ProtectedRoute>
-                <PesananMasukPage />
+                <DetailPesananPage />
               </ProtectedRoute>
             }
           />
