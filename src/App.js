@@ -8,6 +8,9 @@ import Footer from "./component/Footer";
 import DataPaketPage from "./pages/admin-page/DataPaketPage";
 import DashboardPage from "./pages/admin-page/DashboardPage";
 import DaftarPaketPage from "./pages/DaftarPaketPage";
+import DaftarMenuPage from "./pages/admin-page/DaftarMenuPage";
+import PesananMasukPage from "./pages/admin-page/PesananMasukPage";
+import PendapatanPage from "./pages/admin-page/PendapatanPage";
 
 function App() {
   return (
@@ -38,6 +41,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <DataPaketPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/menu/:id"
+            element={
+              <ProtectedRoute>
+                <DaftarMenuPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pemesanan"
+            element={
+              <ProtectedRoute>
+                <PesananMasukPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/detail-pesanan/:id"
+            element={
+              <ProtectedRoute>
+                <PesananMasukPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pendapatan"
+            element={
+              <ProtectedRoute>
+                <PendapatanPage />
               </ProtectedRoute>
             }
           />

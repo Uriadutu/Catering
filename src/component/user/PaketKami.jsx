@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../../auth/Firebase";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FaAnglesRight } from "react-icons/fa6";
-import LihatPesananModal from "../modals/LihatPesananModal";
+import PesanPaketModal from "./PesanModal";  // Import modal pesan paket
 
 const PaketKami = () => {
   const [packages, setPackages] = useState([]);
-  const [openModalInfo, setOpenModalInfo] = useState(false);
-  const [item, setItem] = useState({});
+  const [menus, setMenus] = useState({});
+  const [openModalAdd, setOpenModalAdd] = useState(false);  // Modal untuk pesan paket
+  const [selectedPaket, setSelectedPaket] = useState(null);  // Paket yang dipilih
   const [expandedMenus, setExpandedMenus] = useState({});
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "paket"), (snapshot) => {
+    // Ambil data paket
+    const unsubscribePaket = onSnapshot(collection(db, "paket"), (snapshot) => {
       const paketData = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setPackages(paketData);
+
+      // Setelah paket diambil, ambil menu terkait dengan idPaket
+      paketData.forEach((paket) => {
+        const unsubscribeMenu = onSnapshot(
+          query(collection(db, "menu"), where("idPaket", "==", paket.id)),
+          (menuSnapshot) => {
+            const menuData = menuSnapshot.docs.map((doc) => doc.data());
+            setMenus((prevMenus) => ({
+              ...prevMenus,
+              [paket.id]: menuData,
+            }));
+          }
+        );
+
+        // Unsubscribe menu ketika paket dihapus
+        return () => unsubscribeMenu();
+      });
     });
 
-    return () => unsubscribe();
+    // Cleanup
+    return () => unsubscribePaket();
   }, []);
 
   const formatRupiah = (number) =>
@@ -33,9 +52,9 @@ const PaketKami = () => {
 
   const navigate = useNavigate();
 
-  const handleLihatPesanan = (item) => {
-    setOpenModalInfo(true);
-    setItem(item);
+  const handlePesanPaket = (paket) => {
+    setSelectedPaket(paket);  // Set paket yang dipilih
+    setOpenModalAdd(true);  // Tampilkan modal pesan paket
   };
 
   const toggleExpanded = (id) => {
@@ -48,8 +67,12 @@ const PaketKami = () => {
   return (
     <div className="py-10 px-4 sm:px-0 mx-auto">
       <AnimatePresence>
-        {openModalInfo && (
-          <LihatPesananModal setIsOpenModalAdd={setOpenModalInfo} item={item} />
+        {openModalAdd && (
+          <PesanPaketModal
+            setIsOpenModalAdd={setOpenModalAdd}
+            paket={selectedPaket}
+            menus={menus[selectedPaket.id] || []}  // Kirim menu yang relevan
+          />
         )}
       </AnimatePresence>
       <h2 className="text-2xl sm:text-4xl text-center font-bold text-gray-900 mb-5">
@@ -63,7 +86,7 @@ const PaketKami = () => {
         {packages.length > 0 ? (
           packages.slice(0, 8).map((pkg) => {
             const isExpanded = expandedMenus[pkg.id];
-            const menuList = pkg.menu || []; // array menu makanan
+            const menuList = menus[pkg.id] || []; // menu dari paket terkait
             const firstFive = menuList.slice(0, 5);
             const remaining = menuList.slice(5);
 
@@ -78,13 +101,13 @@ const PaketKami = () => {
 
                 <div className="mb-3 text-sm text-gray-700">
                   <p className="font-medium mb-1">Menu Makanan:</p>
-                  <ul className="list-disc list-inside space-y-1">
+                  <ul className="list-disc list-inside space-y-1 text-left">
                     {firstFive.map((menu, idx) => (
-                      <li key={idx}>{menu}</li>
+                      <li key={idx}>{menu.namaMenu}</li>
                     ))}
                     {isExpanded &&
                       remaining.map((menu, idx) => (
-                        <li key={idx + 5}>{menu}</li>
+                        <li key={idx + 5}>{menu.namaMenu}</li>
                       ))}
                   </ul>
 
@@ -103,7 +126,7 @@ const PaketKami = () => {
                 </p>
 
                 <button
-                  onClick={() => handleLihatPesanan(pkg)}
+                  onClick={() => handlePesanPaket(pkg)}  // Aksi untuk pesan paket
                   className="mt-auto w-full py-2 bg-orange-500 text-white rounded-md text-sm font-medium hover:bg-orange-600 transition duration-300"
                 >
                   Pilih Paket
@@ -117,15 +140,6 @@ const PaketKami = () => {
           </p>
         )}
       </div>
-
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="bg-orange-500 mt-6 flex gap-2 items-center text-white px-4 py-2 rounded text-base"
-        onClick={() => navigate("/daftar-paket")}
-      >
-        Lihat Semua Paket <FaAnglesRight />
-      </motion.button>
     </div>
   );
 };

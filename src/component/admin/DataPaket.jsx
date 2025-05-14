@@ -12,6 +12,7 @@ import {
 import { db } from "../../auth/Firebase";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const DataPaket = () => {
   const [isOpenModalAdd, setIsOpenModalAdd] = useState(false);
@@ -31,6 +32,7 @@ const DataPaket = () => {
     return () => unsubscribe();
   }, []);
 
+  const navigate = useNavigate();
   const formatRupiah = (number) =>
     new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -65,63 +67,67 @@ const DataPaket = () => {
       </AnimatePresence>
 
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-lg font-semibold text-[#207f15]">Data Makanan</h1>
+        <h1 className="text-lg font-semibold text-[#6b5dff]">Data Paket</h1>
         <button
           onClick={handleTambahData}
-          className="bg-[#207f15] text-white px-4 py-2 rounded hover:bg-green-700 transition"
+          className="bg-[#6b5dff] text-white px-4 py-2 rounded hover:bg-blue-700 transition whitespace-nowrap"
         >
           + Tambah Data
         </button>
       </div>
 
-      <div className="w-full max-w-full overflow-x-auto">
+     <div className="w-full max-w-full overflow-x-auto">
         <div className="sm:w-auto w-3">
           <table className="min-w-full text-sm text-gray-800 bg-white">
-            <thead className="bg-gray-100 text-left">
-              <tr>
-                <th className="px-4 py-2 border whitespace-nowrap">
-                  No
-                </th>
-                <th className="px-4 py-2 border whitespace-nowrap">
-                  Nama Makanan
-                </th>
-                <th className="px-4 py-2 border whitespace-nowrap">
-                  Harga
-                </th>
-                <th className="px-4 py-2 border whitespace-nowrap">
-                  Aksi
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paketList.map((paket, index) => (
-                <tr key={paket.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-2 border whitespace-nowrap">{index + 1}</td>
-                  <td className="px-4 py-2 border whitespace-nowrap">{paket.nama}</td>
-                  <td className="px-4 py-2 border whitespace-nowrap">
-                    {formatRupiah(paket.harga)}
-                  </td>
-                  <td className="px-4 py-2 border whitespace-nowrap">
-                    <button
-                      onClick={() => handleDelete(paket.id)}
-                      className="text-red-500 hover:underline"
-                    >
-                      Hapus
-                    </button>
-                  </td>
-                </tr>
-              ))}
-              {paketList.length === 0 && (
+              <thead className="bg-gray-100 text-left text-sm font-semibold text-gray-700">
                 <tr>
-                  <td colSpan={6} className="text-center py-4 text-gray-500">
-                    Belum ada Data Makanan.
-                  </td>
+                  <th className="px-4 py-3 border text-center">No</th>
+                  <th className="px-4 py-3 border">Nama Makanan</th>
+                  <th className="px-4 py-3 border text-right">Harga</th>
+                  <th className="px-4 py-3 border text-center" colSpan={2}>
+                    Aksi
+                  </th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {paketList.map((paket, index) => (
+                  <tr
+                    key={paket.id}
+                    className="hover:bg-gray-50 transition whitespace-nowrap duration-150"
+                  >
+                    <td className="px-4 py-3 border text-center">
+                      {index + 1}
+                    </td>
+                    <td className="px-4 py-3 border">{paket.nama}</td>
+                    <td className="px-4 py-3 border text-right">
+                      {formatRupiah(paket.harga)}
+                    </td>
+                    <td className="px-2 py-3 border text-center">
+                      <button onClick={() => navigate(`/menu/${paket.id}`)} className="flex items-center justify-center text-center gap-1 px-3 py-1 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600 transition whitespace-nowrap">
+                        Lihat Menu
+                      </button>
+                    </td>
+                    <td className="px-2 py-3 border text-center">
+                      <button
+                        onClick={() => handleDelete(paket.id)}
+                        className="flex items-center justify-center gap-1 px-3 py-1 text-sm font-medium text-white bg-red-500 rounded hover:bg-red-600 transition whitespace-nowrap"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {paketList.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="text-center py-6 text-gray-500">
+                      Belum ada Data Makanan.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
     </div>
   );
 };
