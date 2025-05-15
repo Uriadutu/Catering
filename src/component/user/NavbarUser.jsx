@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import nama from "../../img/nama.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ const Navbar = () => {
           onClick={() => handleNavigate("/")}
           translate="no"
         >
-         <img src={nama} className="w-24 sm:w-32" alt="" />
+         <h1 className="text-xl font-bold text-[#6b5dff]">Catering</h1>
         </h1>
 
         <motion.button

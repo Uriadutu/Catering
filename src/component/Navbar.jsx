@@ -11,7 +11,6 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../auth/Firebase";
-import nama from "../img/nama.png";
 
 const Navbar = () => {
   const [openSidebar, setOpenSideBar] = useState(false);
@@ -50,7 +49,6 @@ const Navbar = () => {
               </div>
               <div>
                 <p className="text-sm font-semibold text-[#6b5dff]">
-                  {/* {user.displayName} */}
                 </p>
                 <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
@@ -72,9 +70,8 @@ const Navbar = () => {
 
       {/* Top Navbar */}
       <div className="fixed top-0 left-0 w-full z-30 bg-white border-b border-gray-200 py-6 px-4 sm:px-6 flex justify-between items-center">
-        {/* Nama Aplikasi */}
-         <img src={nama} className="w-24 sm:w-32" alt="" />
-        {/* Mobile: Hamburger Button */}
+       
+         <h1 className="text-xl font-bold text-[#6b5dff]">Catering</h1>
         <button onClick={() => setOpenSideBar(true)} className="sm:hidden">
           <GiHamburgerMenu color="#333" size={22} />
         </button>
